@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureCare Insurance</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Arial,sans-serif;color:#123;background:#f5f9ff}
+    header{background:#0756a8;color:white;padding:18px 7%;display:flex;justify-content:space-between;align-items:center}
+    header h2{font-size:24px}
+    nav a{color:white;text-decoration:none;margin-left:20px}
+    .hero{padding:70px 7%;background:white}
+    .hero h1{font-size:42px;color:#0756a8;margin-bottom:15px}
+    .hero p{font-size:19px;margin-bottom:25px;max-width:600px}
+    .btn{display:inline-block;background:#ff8a00;color:white;padding:14px 24px;border-radius:8px;text-decoration:none;font-weight:bold}
+    .section{padding:50px 7%;text-align:center}
+    .cards{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+    .card{background:white;padding:28px;width:220px;border-radius:12px;box-shadow:0 3px 12px #ddd}
+    .card h3{color:#0756a8;margin-bottom:10px}
+    form{max-width:500px;margin:25px auto;background:white;padding:25px;border-radius:12px}
+    input,select,button{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:7px}
+    button{background:#0756a8;color:white;border:0;font-weight:bold;cursor:pointer}
+    footer{background:#063b73;color:white;text-align:center;padding:25px}
+    @media(max-width:600px){.hero h1{font-size:32px}nav{display:none}}
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>SecureCare Insurance</h2>
+  <nav>
+    <a href="#plans">Plans</a>
+    <a href="#quote">Get Quote</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Protect What Matters Most</h1>
+  <p>Simple and reliable insurance solutions for you and your family.</p>
+  <a class="btn" href="#quote">Get Free Quote</a>
+</section>
+
+<section class="section" id="plans">
+  <h2>Our Insurance Plans</h2>
+  <div class="cards">
+    <div class="card"><h3>❤️ Health</h3><p>Health insurance for you and your family.</p></div>
+    <div class="card"><h3>🚗 Car</h3><p>Protection for your car and your journey.</p></div>
+    <div class="card"><h3>🏍️ Bike</h3><p>Reliable bike insurance coverage.</p></div>
+    <div class="card"><h3>🛡️ Life</h3><p>Secure your family's future.</p></div>
+  </div>
+</section>
+
+<section class="section" id="quote">
+  <h2>Get a Free Quote</h2>
+  <form onsubmit="submitForm(event)">
+    <input type="text" placeholder="Your Name" required>
+    <input type="tel" placeholder="Mobile Number" required>
+    <select required>
+      <option value="">Select Insurance</option>
+      <option>Health Insurance</option>
+      <option>Car Insurance</option>
+      <option>Bike Insurance</option>
+      <option>Life Insurance</option>
+    </select>
+    <button type="submit">Request Quote</button>
+  </form>
+</section>
+
+<footer>
+  <p>© 2026 SecureCare Insurance | Call: +91 8369740626 </p>
+</footer>
+
+<script>
+function submitForm(event){
+  event.preventDefault();
+  alert("Thank you! We will contact you soon.");
+}
+</script>
+
+</body>
+</html>
