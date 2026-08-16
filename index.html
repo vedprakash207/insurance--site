@@ -26,6 +26,8 @@
     /* WhatsApp floating button */
     .whatsapp-btn{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:1000;text-decoration:none;font-size:28px}
     .whatsapp-btn:active{transform:scale(.98)}
+    .consent-label{font-size:14px;display:block;margin-top:8px}
+    .message{max-width:500px;margin:12px auto;text-align:center}
     @media(max-width:600px){.hero h1{font-size:32px}nav{display:none}}
   </style>
 </head>
@@ -57,18 +59,20 @@
 
 <section class="section" id="quote">
   <h2>Get a Free Quote</h2>
-  <form onsubmit="submitForm(event)">
-    <input type="text" placeholder="Your Name" required>
-    <input type="tel" placeholder="Mobile Number" required>
-    <select required>
+  <form id="quoteForm">
+    <input name="name" type="text" placeholder="Your Name" required>
+    <input name="phone" type="tel" placeholder="Mobile Number (e.g. +919999888777)" required>
+    <select name="insurance" required>
       <option value="">Select Insurance</option>
       <option>Health Insurance</option>
       <option>Car Insurance</option>
       <option>Bike Insurance</option>
       <option>Life Insurance</option>
     </select>
+    <label class="consent-label"><input name="consent" type="checkbox" required> I agree to receive WhatsApp messages regarding my quote.</label>
     <button type="submit">Request Quote</button>
   </form>
+  <div class="message" id="message"></div>
 </section>
 
 <footer>
@@ -79,10 +83,44 @@
 <a class="whatsapp-btn" href="https://wa.me/918369740626?text=Hello%20SecureCare%20Insurance%20I%20am%20interested" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
 
 <script>
-function submitForm(event){
-  event.preventDefault();
-  alert("Thank you! We will contact you soon.");
-}
+const msgEl = document.getElementById('message');
+const form = document.getElementById('quoteForm');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msgEl.textContent = '';
+  const name = form.name.value.trim();
+  const phone = form.phone.value.trim();
+  const insurance = form.insurance.value;
+  const consent = form.consent.checked;
+  if (!consent) { msgEl.textContent = 'Please agree to receive WhatsApp messages.'; return; }
+
+  form.querySelector('button[type="submit"]').disabled = true;
+  form.querySelector('button[type="submit"]').textContent = 'Sending...';
+
+  try {
+    const res = await fetch('/api/quotes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, insurance, consent })
+    });
+    if (res.ok) {
+      msgEl.style.color = 'green';
+      msgEl.textContent = 'Thanks — a confirmation will be sent to your WhatsApp shortly.';
+      form.reset();
+    } else {
+      const j = await res.json().catch(()=>({}));
+      msgEl.style.color = 'crimson';
+      msgEl.textContent = 'Submission failed: ' + (j.error || res.statusText);
+    }
+  } catch (err) {
+    console.error(err);
+    msgEl.style.color = 'crimson';
+    msgEl.textContent = 'Network error. Please try again later.';
+  } finally {
+    form.querySelector('button[type="submit"]').disabled = false;
+    form.querySelector('button[type="submit"]').textContent = 'Request Quote';
+  }
+});
 </script>
 
 </body>
