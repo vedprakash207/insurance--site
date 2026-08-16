@@ -22,6 +22,10 @@
     input,select,button{width:100%;padding:13px;margin:8px 0;border:1px solid #ccc;border-radius:7px}
     button{background:#0756a8;color:white;border:0;font-weight:bold;cursor:pointer}
     footer{background:#063b73;color:white;text-align:center;padding:25px}
+
+    /* WhatsApp floating button */
+    .whatsapp-btn{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:1000;text-decoration:none;font-size:28px}
+    .whatsapp-btn:active{transform:scale(.98)}
     @media(max-width:600px){.hero h1{font-size:32px}nav{display:none}}
   </style>
 </head>
@@ -68,8 +72,11 @@
 </section>
 
 <footer>
-  <p>© 2026 SecureCare Insurance | Call: +91 8369740626 </p>
+  <p>© 2026 SecureCare Insurance | Call: <a href="https://wa.me/918369740626" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener noreferrer">+91 8369740626</a></p>
 </footer>
+
+<!-- WhatsApp click-to-chat floating button -->
+<a class="whatsapp-btn" href="https://wa.me/918369740626?text=Hello%20SecureCare%20Insurance%20I%20am%20interested" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
 
 <script>
 function submitForm(event){
