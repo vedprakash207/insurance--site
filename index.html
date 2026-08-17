@@ -23,9 +23,6 @@
     button{background:#0756a8;color:white;border:0;font-weight:bold;cursor:pointer}
     footer{background:#063b73;color:white;text-align:center;padding:25px}
 
-    /* WhatsApp floating button */
-    .whatsapp-btn{position:fixed;right:20px;bottom:20px;background:#25D366;color:white;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,0.2);z-index:1000;text-decoration:none;font-size:28px}
-    .whatsapp-btn:active{transform:scale(.98)}
     .consent-label{font-size:14px;display:block;margin-top:8px}
     .message{max-width:500px;margin:12px auto;text-align:center}
     @media(max-width:600px){.hero h1{font-size:32px}nav{display:none}}
@@ -69,18 +66,15 @@
       <option>Bike Insurance</option>
       <option>Life Insurance</option>
     </select>
-    <label class="consent-label"><input name="consent" type="checkbox" required> I agree to receive WhatsApp messages regarding my quote.</label>
+    <label class="consent-label"><input name="consent" type="checkbox" required> I agree to be contacted regarding my quote.</label>
     <button type="submit">Request Quote</button>
   </form>
   <div class="message" id="message"></div>
 </section>
 
 <footer>
-  <p>© 2026 SecureCare Insurance | Call: <a href="https://wa.me/918369740626" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener noreferrer">+91 8369740626</a></p>
+  <p>© 2026 SecureCare Insurance | Call: <a href="tel:+918369740626" style="color:inherit;text-decoration:underline">+91 8369740626</a></p>
 </footer>
-
-<!-- WhatsApp click-to-chat floating button -->
-<a class="whatsapp-btn" href="https://wa.me/918369740626?text=Hello%20SecureCare%20Insurance%20I%20am%20interested" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">💬</a>
 
 <script>
 const msgEl = document.getElementById('message');
@@ -92,7 +86,7 @@ form.addEventListener('submit', async (e) => {
   const phone = form.phone.value.trim();
   const insurance = form.insurance.value;
   const consent = form.consent.checked;
-  if (!consent) { msgEl.textContent = 'Please agree to receive WhatsApp messages.'; return; }
+  if (!consent) { msgEl.textContent = 'Please agree to be contacted regarding your quote.'; return; }
 
   form.querySelector('button[type="submit"]').disabled = true;
   form.querySelector('button[type="submit"]').textContent = 'Sending...';
@@ -105,7 +99,7 @@ form.addEventListener('submit', async (e) => {
     });
     if (res.ok) {
       msgEl.style.color = 'green';
-      msgEl.textContent = 'Thanks — a confirmation will be sent to your WhatsApp shortly.';
+      msgEl.textContent = "Thanks — we'll contact you shortly with your quote.";
       form.reset();
     } else {
       const j = await res.json().catch(()=>({}));
